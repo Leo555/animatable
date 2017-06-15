@@ -4,973 +4,149 @@
 <head>
     <meta charset="UTF-8">
     <title>Animatable: One property, two values, endless possibilities</title>
-    <link rel="icon" href="favicon.ico" type="image/vnd.microsoft.icon" />
-    <style>
-    @keyframes background-position {
-        from {
-            background-position: 0 0;
-        }
-        to {
-            background-position: 100% 100%;
-        }
-    }
-    
-    * {
-        margin: 0;
-    }
-    
-    body {
-        padding: 1em 5em;
-        font: 1em/1.5em Futura, 'Century Gothic', sans-serif;
-        text-align: center;
-        overflow-x: hidden;
-    }
-    
-    hgroup > h1 {
-        font-size: 500%;
-        line-height: 1;
-        text-transform: lowercase;
-    }
-    
-    hgroup > h2 {
-        line-height: 40px;
-        font-size: 120%;
-    }
-    
-    a {
-        text-decoration: none;
-        color: slategray;
-    }
-    
-    #info {
-        width: 60%;
-        margin: 0 auto;
-        padding: 10px 15px;
-        box-sizing: border-box;
-        overflow: hidden;
-        background: rgba(0, 0, 0, 0.68);
-        color: white;
-        text-align: left;
-        transition: .5s;
-    }
-    
-    #info h1 {
-        color: slategray;
-        margin-bottom: .3em;
-    }
-    
-    #info > a {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        width: 2em;
-        line-height: 2;
-        font-size: 80%;
-        background: rgba(255, 255, 255, .25);
-        color: black;
-        text-align: center;
-        border-radius: 0 50% 50% 0;
-    }
-    
-    #info > a:hover {
-        background: #809070;
-    }
-    
-    #info > a[title="Previous"] {
-        right: 36px;
-        border-radius: 50% 0 0 50%;
-    }
-    
-    dl {
-        font-size: 80%;
-    }
-    
-    dl:after {
-        content: '';
-        display: block;
-        clear: both;
-    }
-    
-    dt {
-        float: left;
-        clear: left;
-        width: 6em;
-        color: gray;
-    }
-    
-    dd {
-        float: left;
-        clear: right;
-        white-space: nowrap;
-    }
-    
-    dd > a {
-        color: inherit;
-    }
-    
-    dd > a > img {
-        margin-right: 5px;
-        vertical-align: -8px;
-        border-radius: 12px;
-    }
-    
-    div[role="main"] {
-        padding: 2em .5em;
-        counter-reset: demo;
-    }
-    
-    div[role="main"]:after {
-        content: '';
-        display: block;
-        clear: both;
-    }
-    
-    div[data-property] {
-        position: relative;
-        float: left;
-        width: 150px;
-        height: 150px;
-        box-sizing: border-box;
-        margin: 0 15px 30px;
-        background: slategray;
-        color: white;
-        font-size: 60px;
-        line-height: 150px;
-        text-align: center;
-        counter-increment: demo;
-        outline-color: transparent;
-    }
-    
-    div[data-property]:after {
-        content: attr(data-property);
-        position: absolute;
-        right: 0;
-        left: 0;
-        bottom: -1.2em;
-        z-index: 2;
-        color: slategray;
-        font-size: 14px;
-        line-height: 1;
-        text-indent: 0;
-        text-shadow: none;
-        letter-spacing: 0;
-    }
-    
-    div[data-property]:before {
-        content: counter(demo);
-    }
-    
-    .github-ribbon {
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
-    
-    @keyframes background-color {
-        from {
-            background: slategray;
-        }
-        to {
-            background: black;
-        }
-    }
-    
-    #background-color:hover {
-        animation: background-color 1s infinite;
-    }
-    
-    @keyframes background-position {
-        from {
-            background-position: 0 0;
-        }
-        to {
-            background-position: 100% 100%;
-        }
-    }
-    
-    #background-position {
-        background-image: linear-gradient(135deg, transparent 25%, black 25%, black 50%, transparent 50%, transparent 75%, black 75%, black);
-        background-size: 50px 50px;
-        background-position: 0 0;
-    }
-    
-    #background-position:hover {
-        animation: background-position 1s infinite;
-    }
-    
-    @keyframes background-position1 {
-        from {
-            background-position: 3px 0, 3px 0, 15px -150px, 15px -150px;
-        }
-        to {
-            background-position: 3px -70px, 3px -70px, 15px -80px, 15px -80px;
-        }
-    }
-    
-    #background-position1 {
-        background-color: #E04332;
-        background-repeat: repeat-x;
-        background-size: 24px 300px;
-        background-image: linear-gradient(135deg, slategray 25%, transparent 25%), linear-gradient(45deg, transparent 75%, slategray 75%), linear-gradient(45deg, slategray 25%, transparent 25%), linear-gradient(135deg, transparent 75%, slategray 75%);
-        background-position: 3px 0, 3px 0, 15px -150px, 15px -150px;
-    }
-    
-    #background-position1:hover {
-        animation: background-position1 1s infinite alternate;
-    }
-    
-    @keyframes background-size {
-        from {
-            background-size: 5px 5px;
-        }
-        to {
-            background-size: 150px 150px;
-        }
-    }
-    
-    #background-size {
-        background-image: repeating-radial-gradient(transparent, transparent 9px, black 11px, black 20px);
-        background-position: center;
-        background-size: 5px 5px;
-    }
-    
-    #background-size:hover {
-        animation: background-size 1s infinite alternate;
-    }
-    
-    @keyframes border-radius {
-        from {
-            border-radius: 0;
-        }
-        to {
-            border-radius: 50%
-        }
-    }
-    
-    #border-radius {
-        border-radius: 0;
-    }
-    
-    #border-radius:hover {
-        animation: border-radius 1s infinite alternate;
-    }
-    
-    @keyframes border-radius1 {
-        from {
-            border-radius: 0 100%
-        }
-        to {
-            border-radius: 100% 0
-        }
-    }
-    
-    #border-radius1 {
-        border-radius: 0 100%;
-    }
-    
-    #border-radius1:hover {
-        animation: border-radius1 1s infinite alternate;
-    }
-    
-    @keyframes border-width {
-        from {
-            border-width: 0;
-        }
-        to {
-            border-width: 75px;
-        }
-    }
-    
-    #border-width {
-        border-style: solid;
-        border-color: black;
-        border-width: 0;
-    }
-    
-    #border-width:hover {
-        animation: border-width 1s infinite alternate;
-    }
-    
-    @keyframes border_width1 {
-        from {
-            border-width: 0;
-        }
-        to {
-            border-width: 35px;
-        }
-    }
-    
-    #border-width1 {
-        border-style: dashed;
-        border-color: black;
-        border-width: 0;
-    }
-    
-    #border-width1:hover {
-        animation: border_width1 1s infinite alternate;
-    }
-    
-    @keyframes border-width2 {
-        from {
-            border-width: 0;
-        }
-        to {
-            border-width: 75px;
-        }
-    }
-    
-    #border-width2 {
-        border-style: double;
-        border-color: black;
-        border-width: 0;
-    }
-    
-    #border-width2:hover {
-        animation: border-width2 1s infinite alternate;
-    }
-    
-    @keyframes box-shadow {
-        from {
-            box-shadow: 0 0 black;
-        }
-        to {
-            box-shadow: 0 150px 10px -50px rgba(0, 0, 0, .5);
-        }
-    }
-    
-    #box-shadow {
-        box-shadow: 0 0 black;
-    }
-    
-    #box-shadow:hover {
-        animation: box-shadow 1s infinite alternate;
-    }
-    
-    @keyframes box-shadow1 {
-        from {
-            box-shadow: none;
-        }
-        to {
-            box-shadow: inset -75px -75px 400px #000;
-        }
-    }
-    
-    #box-shadow1 {
-        box-shadow: none;
-    }
-    
-    #box-shadow1:hover {
-        animation: box-shadow1 1s infinite alternate;
-    }
-    
-    @keyframes box-shadow2 {
-        from {
-            box-shadow: inset 0 0 75px 75px slategray, 0 0 0 slategray;
-        }
-        to {
-            box-shadow: inset 0 0 35px 35px transparent, 0 0 75px 50px transparent;
-        }
-    }
-    
-    #box-shadow2 {
-        background: transparent;
-        border-radius: 1px;
-        box-shadow: inset 0 0 75px 75px slategray, 0 0 0 slategray;
-    }
-    
-    #box-shadow2:hover {
-        animation: box-shadow2 1s infinite alternate;
-    }
-    
-    @keyframes color {
-        from {
-            color: white;
-        }
-        to {
-            color: black;
-        }
-    }
-    
-    #color {
-        color: white;
-    }
-    
-    #color:hover {
-        animation: color 1s infinite alternate;
-    }
-    
-    @keyframes font-size {
-        from {
-            font-size: 60px;
-        }
-        to {
-            font-size: 300px;
-        }
-    }
-    
-    #font-size {
-        font-size: 60px;
-    }
-    
-    #font-size:hover {
-        animation: font-size 1s infinite alternate;
-    }
-    
-    @keyframes height {
-        from {
-            height: 150px;
-        }
-        to {
-            height: 0;
-        }
-    }
-    
-    #height {
-        height: 150px;
-    }
-    
-    #height:hover {
-        animation: height 1s infinite alternate;
-    }
-    
-    @keyframes letter-spacing {
-        from {
-            letter-spacing: 0;
-        }
-        to {
-            letter-spacing: 100px;
-        }
-    }
-    
-    #letter-spacing {
-        letter-spacing: 0;
-    }
-    
-    #letter-spacing:hover {
-        animation: letter-spacing 1s infinite alternate;
-    }
-    
-    @keyframes line-height {
-        from {
-            line-height: 10px;
-        }
-        to {
-            line-height: 300px;
-        }
-    }
-    
-    #line-height {
-        line-height: 10px;
-    }
-    
-    #line-height:hover {
-        animation: line-height 1s infinite alternate;
-    }
-    
-    @keyframes opacity {
-        from {
-            opacity: 1;
-        }
-        to {
-            opacity: 0;
-        }
-    }
-    
-    #opacity {
-        opacity: 1;
-    }
-    
-    #opacity:hover {
-        animation: opacity 1s infinite alternate;
-    }
-    
-    @keyframes outline-width {
-        from {
-            outline-width: 0;
-        }
-        to {
-            outline-width: 100px;
-        }
-    }
-    
-    #outline-width {
-        outline-color: black;
-        outline-style: solid;
-        outline-width: 0;
-    }
-    
-    #outline-width:hover {
-        animation: outline-width 1s infinite alternate;
-    }
-    
-    @keyframes outline-offset {
-        from {
-            outline-offset: -5px;
-        }
-        to {
-            outline-offset: 30px;
-        }
-    }
-    
-    #outline-offset {
-        outline-style: dashed;
-        outline-color: slategray;
-        outline-offset: -5px;
-    }
-    
-    #outline-offset:hover {
-        animation: outline-offset 1s infinite alternate;
-    }
-    
-    @keyframes outline-color {
-        from {
-            outline-color: transparent;
-        }
-        to {
-            outline-color: red;
-        }
-    }
-    
-    #outline-color {
-        outline-width: 30px;
-        outline-style: solid;
-        outline-color: transparent;
-    }
-    
-    #outline-color:hover {
-        animation: outline-color 1s infinite alternate;
-    }
-    
-    @keyframes padding {
-        from {
-            padding: 0;
-        }
-        to {
-            padding: 50px 200px 50px 50px;
-        }
-    }
-    
-    #padding {
-        padding: 0;
-    }
-    
-    #padding:hover {
-        animation: padding 1s infinite alternate;
-    }
-    
-    @keyframes text-indent {
-        from {
-            text-indent: 0;
-        }
-        to {
-            text-indent: 100px;
-        }
-    }
-    
-    #text-indent {
-        text-indent: 0;
-    }
-    
-    #text-indent:hover {
-        animation: text-indent 1s infinite alternate;
-    }
-    
-    @keyframes text-shadow {
-        from {
-            text-shadow: 0 0 black;
-        }
-        to {
-            text-shadow: 20px 20px 10px rgba(0, 0, 0, .5);
-        }
-    }
-    
-    #text-shadow {
-        text-shadow: 0 0 black;
-    }
-    
-    #text-shadow:hover {
-        animation: text-shadow 1s infinite alternate;
-    }
-    
-    @keyframes text-shadow1 {
-        from {
-            text-shadow: 0 0 0 white;
-        }
-        to {
-            text-shadow: 0 0 10px white;
-        }
-    }
-    
-    #text-shadow1 {
-        color: transparent;
-        text-shadow: 0 0 0 white;
-    }
-    
-    #text-shadow1:hover {
-        animation: text-shadow1 1s infinite alternate;
-    }
-    
-    @keyframes text-shadow2 {
-        from {
-            text-shadow: 0 0 white;
-        }
-        to {
-            text-shadow: 0 0 rgba(255, 255, 255, 0), -45px -45px 0 red, -30px -30px 0 orange, -15px -15px 0 yellow, 0 0 0 green, 15px 15px 0 blue, 30px 30px 0 indigo, 45px 45px 0 violet;
-        }
-    }
-    
-    #text-shadow2 {
-        color: transparent;
-        text-shadow: 0 0 white;
-    }
-    
-    #text-shadow2:hover {
-        animation: text-shadow2 1s infinite alternate;
-    }
-    
-    @keyframes top {
-        from {
-            top: 0;
-        }
-        to {
-            top: 100px;
-        }
-    }
-    
-    #top {
-        position: relative;
-        top: 0;
-    }
-    
-    #top:hover {
-        animation: top 1s infinite alternate;
-    }
-    
-    @keyframes transform {
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(360deg);
-        }
-    }
-    
-    #transform {
-        transform: rotate(0deg);
-    }
-    
-    #transform:hover {
-        animation: transform 1s infinite alternate;
-    }
-    
-    @keyframes transform1 {
-        from {
-            transform: scale(1);
-        }
-        to {
-            transform: scale(2);
-        }
-    }
-    
-    #transform1 {
-        transform: scale(1);
-    }
-    
-    #transform1:hover {
-        animation: transform1 1s infinite alternate;
-    }
-    
-    @keyframes transform2 {
-        from {
-            transform: skewX(0deg);
-        }
-        to {
-            transform: skewX(180deg);
-        }
-    }
-    
-    #transform2 {
-        transform: skewX(0deg);
-    }
-    
-    #transform2:hover {
-        animation: transform2 1s infinite alternate;
-    }
-    
-    @keyframes transform3 {
-        from {
-            transform: rotate(0deg) scale(1);
-        }
-        to {
-            transform: rotate(360deg) scale(0);
-        }
-    }
-    
-    #transform3 {
-        transform: rotate(0deg) scale(1);
-    }
-    
-    #transform3:hover {
-        animation: transform3 1s infinite alternate;
-    }
-    
-    @keyframes transform4 {
-        from {
-            transform: perspective(400px) rotateY(0deg);
-        }
-        to {
-            transform: perspective(400px) rotateY(360deg);
-        }
-    }
-    
-    #transform4 {
-        transform: perspective(400px) rotateY(0deg)
-    }
-    
-    #transform4:hover {
-        animation: transform4 1s infinite alternate;
-    }
-    
-    @keyframes transform5 {
-        from {
-            transform: perspective(400px) rotateX(0deg);
-        }
-        to {
-            transform: perspective(400px) rotateX(360deg);
-        }
-    }
-    
-    #transform5 {
-        transform: perspective(400px) rotateX(0deg);
-    }
-    
-    #transform5:hover {
-        animation: transform5 1s infinite alternate;
-    }
-    
-    @keyframes transform6 {
-        from {
-            transform: perspective(400px) rotateY(0deg);
-        }
-        to {
-            transform: perspective(400px) translateZ(150px) rotateY(180deg);
-        }
-    }
-    
-    #transform6 {
-        transform: perspective(400px) rotateY(0deg);
-    }
-    
-    #transform6:hover {
-        animation: transform6 1s infinite alternate;
-    }
-    
-    @keyframes transform7 {
-        from {
-            transform: perspective(400px) translate3d(0, 0, 0) rotateX(0) rotateY(0) rotateZ(0);
-        }
-        to {
-            transform: perspective(400px) translate3d(0, 0, -5000px) rotateX(720deg) rotateY(360deg) rotateZ(-360deg);
-        }
-    }
-    
-    #transform7 {
-        transform: perspective(400px) translate3d(0, 0, 0) rotateX(0) rotateY(0) rotateZ(0);
-    }
-    
-    #transform7:hover {
-        animation: transform7 1s infinite alternate;
-    }
-    
-    @keyframes transform8 {
-        from {
-            transform: perspective(400px) rotate3d(1, 1, 0, 0deg);
-        }
-        to {
-            transform: perspective(400px) rotate3d(1, 1, 0, 180deg);
-        }
-    }
-    
-    #transform8 {
-        transform: perspective(400px) rotate3d(1, 1, 0, 0deg);
-    }
-    
-    #transform8:hover {
-        animation: transform8 1s infinite alternate;
-    }
-    
-    @keyframes transform9 {
-        from {
-            transform: perspective(400px) rotate3d(0, 1, 0, 0deg);
-        }
-        to {
-            transform: perspective(400px) rotate3d(0, 1, 0, -180deg);
-        }
-    }
-    
-    #transform9 {
-        transform-origin: 100% 50%;
-        transform: perspective(400px) rotate3d(0, 1, 0, 0deg)
-    }
-    
-    #transform9:hover {
-        animation: transform9 1s infinite alternate;
-    }
-    
-    @keyframes transform-origin {
-        from {
-            transform-origin: 50% 50%;
-        }
-        to {
-            transform-origin: 0 100%;
-        }
-    }
-    
-    #transform-origin {
-        transform: rotate(45deg);
-        transform-origin: 50% 50%;
-    }
-    
-    #transform-origin:hover {
-        animation: transform-origin 1s infinite alternate;
-    }
-    
-    @keyframes width {
-        from {
-            width: 150px;
-        }
-        to {
-            width: 330px;
-        }
-    }
-    
-    #width {
-        width: 150px;
-    }
-    
-    #width:hover {
-        animation: width 1s infinite alternate;
-    }
-    </style>
+    <link rel="icon" href="favicon.ico" type="image/vnd.microsoft.icon"/>
+    <link rel="stylesheet" type="text/css" href="animate.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
-    <hgroup>
-        <h1><a href="#">Animatable</a></h1>
-        <h2>One property, two values, endless possibilities</h2>
-    </hgroup>
-    <section id="info">
-        <h1>box-shadow</h1>
-        <a href="#" title="Close">◀</a>
-        <dl>
-            <dt>animation: </dt>
-            <dd></dd>
-            <dt>keyframes: </dt>
-            <dd></dd>
-            <dd></dd>
-            <dt>Author: </dt>
-            <dd><a href="https://lz5z.com">@Leo555</a></dd>
-        </dl>
-    </section>
-    <div role="main">
-        <div id="background-color" data-property="background-color"></div>
-        <div id="background-position" data-property="background-position"></div>
-        <div id="background-position1" data-property="background-position" data-author="kizmarh"></div>
-        <div id="background-size" data-property="background-size"></div>
-        <div id="border-radius" data-property="border-radius"></div>
-        <div id="border-radius1" data-property="border-radius"></div>
-        <div id="border-width" data-property="border-width"></div>
-        <div id="border-width1" data-property="border-width"></div>
-        <div id="border-width2" data-property="border-width"></div>
-        <div id="box-shadow" data-property="box-shadow"></div>
-        <div id="box-shadow1" data-property="box-shadow" data-author="yuritkachenko"></div>
-        <div id="box-shadow2" data-property="box-shadow" data-author="kizmarh"></div>
-        <div id="color" data-property="color"></div>
-        <div id="font-size" data-property="font-size"></div>
-        <div id="height" data-property="height"></div>
-        <div id="letter-spacing" data-property="letter-spacing"></div>
-        <div id="line-height" data-property="line-height"></div>
-        <div id="opacity" data-property="opacity"></div>
-        <div id="outline-width" data-property="outline-width"></div>
-        <div id="outline-offset" data-property="outline-offset" data-author="mkuehnel"></div>
-        <div id="outline-color" data-property="outline-color" data-author="mkuehnel"></div>
-        <div id="padding" data-property="padding" data-author="steno"></div>
-        <div id="text-indent" data-property="text-indent"></div>
-        <div id="text-shadow" data-property="text-shadow"></div>
-        <div id="text-shadow1" data-property="text-shadow" data-author="bartaz"></div>
-        <div id="text-shadow2" data-property="text-shadow" data-author="kizmarh"></div>
-        <div id="top" data-property="top"></div>
-        <div id="transform" data-property="transform"></div>
-        <div id="transform1" data-property="transform"></div>
-        <div id="transform2" data-property="transform"></div>
-        <div id="transform3" data-property="transform"></div>
-        <div id="transform4" data-property="transform"></div>
-        <div id="transform5" data-property="transform" data-author="calvein"></div>
-        <div id="transform6" data-property="transform" data-author="bartaz"></div>
-        <div id="transform7" data-property="transform" data-author="bartaz"></div>
-        <div id="transform8" data-property="transform" data-author="bartaz"></div>
-        <div id="transform9" data-property="transform" data-author="filipearaujo"></div>
-        <div id="transform-origin" data-property="transform-origin" style=""></div>
-        <div id="width" data-property="width" data-author="mkuehnel"></div>
-    </div>
-    <footer>Made by <a href="http://lea.verou.me">Lea Verou</a> with care</footer>
-    <a href="https://github.com/Leo555/animatable" target="_blank" class="github-ribbon">
-        <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
-    </a>
-    <script>
-    function $(expr, con) {
-        return (con || document).querySelector(expr);
-    }
-
-    function $$(expr, con) {
-        return [].slice.call((con || document).querySelectorAll(expr))
-    }
-
-    $$('div[data-property]').forEach(function(el, i) {
-        let property = el.getAttribute('data-property')
-        el.addEventListener('click', function() {
-            let CSSStyleDeclaration = getComputedStyle(el)
-            let animation = CSSStyleDeclaration.animation,
-                animationName = CSSStyleDeclaration.animationName,
-                animationDelay = CSSStyleDeclaration.animationDelay,
-                animationDirection = CSSStyleDeclaration.animationDirection,
-                animationDuration = CSSStyleDeclaration.animationDuration,
-                animationFillMode = CSSStyleDeclaration.animationFillMode,
-                animationIterationCount = CSSStyleDeclaration.animationIterationCount,
-                animationPlayState = CSSStyleDeclaration.animationPlayState,
-                animationTimingFunction = CSSStyleDeclaration.animationTimingFunction
-
-            if (!animation) {
-                animation = [animationName, animationDuration, animationTimingFunction, animationDelay, animationFillMode, animationIterationCount, animationDirection].join(' ')
-            }
-            let info = $('#info'),
-                author = el.getAttribute('data-author') || 'leaverou',
-                keyframes = findKeyframesRule(animationName)
-
-            $('h1', info).innerHTML = el.getAttribute('data-property')
-            $('dd:first-of-type', info).innerHTML = animation
-            $('dd:nth-of-type(2)', info).innerHTML = keyframes.slice(0, 150)
-            if (keyframes.length > 150) {
-                $('dd:nth-of-type(3)', info).innerHTML = keyframes.slice(150, keyframes.length - 1)
-            } else {
-                $('dd:nth-of-type(3)', info).innerHTML = ''
-            }
-            $('dd:nth-of-type(4)', info).innerHTML = '<a href="http://twitter.com/' + author + '" target="_blank">@' + author + '</a>'
-        })
-    });
-
-    function findKeyframesRule(rule) {
-        let ss = document.styleSheets;
-        for (let i = 0; i < ss.length; ++i) {
-            for (let j = 0; j < ss[i].cssRules.length; ++j) {
-                if (ss[i].cssRules[j].name == rule) {
-                    return ss[i].cssRules[j].cssText
-                }
-            }
-        }
-        return ''
-    }
-    </script>
+<hgroup>
+    <h1><a href="#">Animatable</a></h1>
+    <h2>One property, two values, endless possibilities</h2>
+</hgroup>
+<section id="info">
+    <h1>box-shadow</h1>
+    <dl>
+        <dt>animation:</dt>
+        <dd></dd>
+        <dt>Author:</dt>
+        <dd><a href="https://lz5z.com">@Leo555</a></dd>
+    </dl>
+</section>
+<div role="main">
+    <div id="background-color" data-property="background-color"></div>
+    <div id="background-position" data-property="background-position"></div>
+    <div id="background-position1" data-property="background-position" data-author="kizmarh"></div>
+    <div id="background-size" data-property="background-size"></div>
+    <div id="border-radius" data-property="border-radius"></div>
+    <div id="border-radius1" data-property="border-radius"></div>
+    <div id="border-width" data-property="border-width"></div>
+    <div id="border-width1" data-property="border-width"></div>
+    <div id="border-width2" data-property="border-width"></div>
+    <div id="box-shadow" data-property="box-shadow"></div>
+    <div id="box-shadow1" data-property="box-shadow" data-author="yuritkachenko"></div>
+    <div id="box-shadow2" data-property="box-shadow" data-author="kizmarh"></div>
+    <div id="color" data-property="color"></div>
+    <div id="font-size" data-property="font-size"></div>
+    <div id="height" data-property="height"></div>
+    <div id="letter-spacing" data-property="letter-spacing"></div>
+    <div id="line-height" data-property="line-height"></div>
+    <div id="opacity" data-property="opacity"></div>
+    <div id="outline-width" data-property="outline-width"></div>
+    <div id="outline-offset" data-property="outline-offset" data-author="mkuehnel"></div>
+    <div id="outline-color" data-property="outline-color" data-author="mkuehnel"></div>
+    <div id="padding" data-property="padding" data-author="steno"></div>
+    <div id="text-indent" data-property="text-indent"></div>
+    <div id="text-shadow" data-property="text-shadow"></div>
+    <div id="text-shadow1" data-property="text-shadow" data-author="bartaz"></div>
+    <div id="text-shadow2" data-property="text-shadow" data-author="kizmarh"></div>
+    <div id="top" data-property="top"></div>
+    <div id="transform" data-property="transform"></div>
+    <div id="transform1" data-property="transform"></div>
+    <div id="transform2" data-property="transform"></div>
+    <div id="transform3" data-property="transform"></div>
+    <div id="transform4" data-property="transform"></div>
+    <div id="transform5" data-property="transform" data-author="calvein"></div>
+    <div id="transform6" data-property="transform" data-author="bartaz"></div>
+    <div id="transform7" data-property="transform" data-author="bartaz"></div>
+    <div id="transform8" data-property="transform" data-author="bartaz"></div>
+    <div id="transform9" data-property="transform" data-author="filipearaujo"></div>
+    <div id="transform-origin" data-property="transform-origin" style=""></div>
+    <div id="width" data-property="width" data-author="mkuehnel"></div>
+    <!--下面动画效果来自 animate.css-->
+    <div class="bounce" data-property="bounce" data-author="Animate.css"></div>
+    <div class="flash" data-property="flash" data-author="Animate.css"></div>
+    <div class="pulse" data-property="pulse" data-author="Animate.css"></div>
+    <div class="rubberBand" data-property="rubberBand" data-author="Animate.css"></div>
+    <div class="shake" data-property="shake" data-author="Animate.css"></div>
+    <div class="headShake" data-property="headShake" data-author="Animate.css"></div>
+    <div class="swing" data-property="swing" data-author="Animate.css"></div>
+    <div class="tada" data-property="tada" data-author="Animate.css"></div>
+    <div class="wobble" data-property="wobble" data-author="Animate.css"></div>
+    <div class="jello" data-property="jello" data-author="Animate.css"></div>
+    <div class="bounceIn" data-property="bounceIn" data-author="Animate.css"></div>
+    <div class="bounceInDown" data-property="bounceInDown" data-author="Animate.css"></div>
+    <div class="bounceInLeft" data-property="bounceInLeft" data-author="Animate.css"></div>
+    <div class="bounceInRight" data-property="bounceInRight" data-author="Animate.css"></div>
+    <div class="bounceInUp" data-property="bounceInUp" data-author="Animate.css"></div>
+    <div class="bounceOut" data-property="bounceOut" data-author="Animate.css"></div>
+    <div class="bounceOutDown" data-property="bounceOutDown" data-author="Animate.css"></div>
+    <div class="bounceOutLeft" data-property="bounceOutLeft" data-author="Animate.css"></div>
+    <div class="bounceOutRight" data-property="bounceOutRight" data-author="Animate.css"></div>
+    <div class="bounceOutUp" data-property="bounceOutUp" data-author="Animate.css"></div>
+    <div class="fadeIn" data-property="fadeIn" data-author="Animate.css"></div>
+    <div class="fadeInDown" data-property="fadeInDown" data-author="Animate.css"></div>
+    <div class="fadeInDownBig" data-property="fadeInDownBig" data-author="Animate.css"></div>
+    <div class="fadeInLeft" data-property="fadeInLeft" data-author="Animate.css"></div>
+    <div class="fadeInLeftBig" data-property="fadeInLeftBig" data-author="Animate.css"></div>
+    <div class="fadeInRight" data-property="fadeInRight" data-author="Animate.css"></div>
+    <div class="fadeInRightBig" data-property="fadeInRightBig" data-author="Animate.css"></div>
+    <div class="fadeInUp" data-property="fadeInUp" data-author="Animate.css"></div>
+    <div class="fadeInUpBig" data-property="fadeInUpBig" data-author="Animate.css"></div>
+    <div class="fadeOut" data-property="fadeOut" data-author="Animate.css"></div>
+    <div class="fadeOutDown" data-property="fadeOutDown" data-author="Animate.css"></div>
+    <div class="fadeOutDownBig" data-property="fadeOutDownBig" data-author="Animate.css"></div>
+    <div class="fadeOutLeft" data-property="fadeOutLeft" data-author="Animate.css"></div>
+    <div class="fadeOutLeftBig" data-property="fadeOutLeftBig" data-author="Animate.css"></div>
+    <div class="fadeOutRight" data-property="fadeOutRight" data-author="Animate.css"></div>
+    <div class="fadeOutRightBig" data-property="fadeOutRightBig" data-author="Animate.css"></div>
+    <div class="fadeOutUp" data-property="fadeOutUp" data-author="Animate.css"></div>
+    <div class="fadeOutUpBig" data-property="fadeOutUpBig" data-author="Animate.css"></div>
+    <div class="flip" data-property="flip" data-author="Animate.css"></div>
+    <div class="flipInX" data-property="flipInX" data-author="Animate.css"></div>
+    <div class="flipInY" data-property="flipInY" data-author="Animate.css"></div>
+    <div class="flipOutX" data-property="flipOutX" data-author="Animate.css"></div>
+    <div class="flipOutY" data-property="flipOutY" data-author="Animate.css"></div>
+    <div class="lightSpeedIn" data-property="lightSpeedIn" data-author="Animate.css"></div>
+    <div class="lightSpeedOut" data-property="lightSpeedOut" data-author="Animate.css"></div>
+    <div class="rotateIn" data-property="rotateIn" data-author="Animate.css"></div>
+    <div class="rotateInDownLeft" data-property="rotateInDownLeft" data-author="Animate.css"></div>
+    <div class="rotateInDownRight" data-property="rotateInDownRight" data-author="Animate.css"></div>
+    <div class="rotateInUpLeft" data-property="rotateInUpLeft" data-author="Animate.css"></div>
+    <div class="rotateInUpRight" data-property="rotateInUpRight" data-author="Animate.css"></div>
+    <div class="rotateOut" data-property="rotateOut" data-author="Animate.css"></div>
+    <div class="rotateOutDownLeft" data-property="rotateOutDownLeft" data-author="Animate.css"></div>
+    <div class="rotateOutDownRight" data-property="rotateOutDownRight" data-author="Animate.css"></div>
+    <div class="rotateOutUpLeft" data-property="rotateOutUpLeft" data-author="Animate.css"></div>
+    <div class="rotateOutUpRight" data-property="rotateOutUpRight" data-author="Animate.css"></div>
+    <div class="hinge" data-property="hinge" data-author="Animate.css"></div>
+    <div class="jackInTheBox" data-property="jackInTheBox" data-author="Animate.css"></div>
+    <div class="rollIn" data-property="rollIn" data-author="Animate.css"></div>
+    <div class="rollOut" data-property="rollOut" data-author="Animate.css"></div>
+    <div class="zoomIn" data-property="zoomIn" data-author="Animate.css"></div>
+    <div class="zoomInDown" data-property="zoomInDown" data-author="Animate.css"></div>
+    <div class="zoomInLeft" data-property="zoomInLeft" data-author="Animate.css"></div>
+    <div class="zoomInRight" data-property="zoomInRight" data-author="Animate.css"></div>
+    <div class="zoomInUp" data-property="zoomInUp" data-author="Animate.css"></div>
+    <div class="zoomOut" data-property="zoomOut" data-author="Animate.css"></div>
+    <div class="zoomOutDown" data-property="zoomOutDown" data-author="Animate.css"></div>
+    <div class="zoomOutLeft" data-property="zoomOutLeft" data-author="Animate.css"></div>
+    <div class="zoomOutRight" data-property="zoomOutRight" data-author="Animate.css"></div>
+    <div class="zoomOutUp" data-property="zoomOutUp" data-author="Animate.css"></div>
+    <div class="slideInDown" data-property="slideInDown" data-author="Animate.css"></div>
+    <div class="slideInLeft" data-property="slideInLeft" data-author="Animate.css"></div>
+    <div class="slideInRight" data-property="slideInRight" data-author="Animate.css"></div>
+    <div class="slideInUp" data-property="slideInUp" data-author="Animate.css"></div>
+    <div class="slideOutDown" data-property="slideOutDown" data-author="Animate.css"></div>
+    <div class="slideOutLeft" data-property="slideOutLeft" data-author="Animate.css"></div>
+    <div class="slideOutRight" data-property="slideOutRight" data-author="Animate.css"></div>
+    <div class="slideOutUp" data-property="slideOutUp" data-author="Animate.css"></div>
+</div>
+<footer>Made by <a href="http://lea.verou.me">Lea Verou</a> with care</footer>
+<a href="https://github.com/Leo555/animatable" target="_blank" class="github-ribbon">
+    <img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+</a>
+<script src="index.js"></script>
 </body>
 
 </html>
