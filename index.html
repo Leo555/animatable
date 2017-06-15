@@ -866,8 +866,9 @@
             <dd></dd>
             <dt>keyframes: </dt>
             <dd></dd>
+            <dd></dd>
             <dt>Author: </dt>
-            <dd>@Leo555</dd>
+            <dd><a href="https://lz5z.com">@Leo555</a></dd>
         </dl>
     </section>
     <div role="main">
@@ -925,9 +926,8 @@
     }
 
     $$('div[data-property]').forEach(function(el, i) {
-        var property = el.getAttribute('data-property')
+        let property = el.getAttribute('data-property')
         el.addEventListener('click', function() {
-            
             let CSSStyleDeclaration = getComputedStyle(el)
             let animation = CSSStyleDeclaration.animation,
                 animationName = CSSStyleDeclaration.animationName,
@@ -948,15 +948,20 @@
 
             $('h1', info).innerHTML = el.getAttribute('data-property')
             $('dd:first-of-type', info).innerHTML = animation
-            $('dd:nth-of-type(2)', info).innerHTML = keyframes
-            $('dd:nth-of-type(3)', info).innerHTML = '<a href="http://twitter.com/' + author + '" target="_blank">@' + author + '</a>'
+            $('dd:nth-of-type(2)', info).innerHTML = keyframes.slice(0, 150)
+            if (keyframes.length > 150) {
+                $('dd:nth-of-type(3)', info).innerHTML = keyframes.slice(150, keyframes.length - 1)
+            } else {
+                $('dd:nth-of-type(3)', info).innerHTML = ''
+            }
+            $('dd:nth-of-type(4)', info).innerHTML = '<a href="http://twitter.com/' + author + '" target="_blank">@' + author + '</a>'
         })
     });
 
     function findKeyframesRule(rule) {
-        var ss = document.styleSheets;
-        for (var i = 0; i < ss.length; ++i) {
-            for (var j = 0; j < ss[i].cssRules.length; ++j) {
+        let ss = document.styleSheets;
+        for (let i = 0; i < ss.length; ++i) {
+            for (let j = 0; j < ss[i].cssRules.length; ++j) {
                 if (ss[i].cssRules[j].name == rule) {
                     return ss[i].cssRules[j].cssText
                 }
